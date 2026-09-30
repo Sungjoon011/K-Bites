@@ -37,11 +37,3 @@ This project successfully implements the three core technical requirements:
 * **Database:** MongoDB (or MySQL)
 * **Security:** dotenv (for environment variables), input sanitization
 
-## 🛠️ Getting Started (Local Development)
-
-To run this project locally on your machine:
-
-1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/yourusername/k-bites.git](https://github.com/yourusername/k-bites.git)
-   cd k-bites
