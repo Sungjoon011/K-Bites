@@ -1,0 +1,28 @@
+{
+  "name": "sia-groupings",
+  "version": "1.0.0",
+  "description": "K-Bites is a full-stack e-commerce web application designed to act as the digital storefront for a local Korean food cloud kitchen. Built for a Web Development performance task, this system upgrades a manual, chat-based ordering process into a fully automated platform with dynamic delivery calculations and secure online checkouts.",
+  "main": "index.js",
+ "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sungjoon011/K-Bites.git"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Sungjoon011/K-Bites/issues"
+  },
+  "homepage": "https://github.com/Sungjoon011/K-Bites#readme",
+  "dependencies": {
+    "dotenv": "^18.0.6",
+    "express": "^5.2.1",
+    "mongoose": "^9.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
