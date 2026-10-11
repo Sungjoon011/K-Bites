@@ -1,0 +1,327 @@
+/* =========================================
+   1. RESET & BASE STYLES
+========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #030303; 
+    color: #FFFFFE; 
+    overflow-x: hidden;
+}
+
+/* =========================================
+   2. NAVBAR (Transparent & Blurred)
+========================================= */
+nav {
+    background-color: rgba(3, 3, 3, 0.4); 
+    backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px); 
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 15px 40px;
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    border-bottom: 1px solid rgba(255, 255, 254, 0.08); 
+}
+
+.logo a {
+    color: #FFFFFE;
+    text-decoration: none;
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+nav a {
+    color: #FFFFFE;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: opacity 0.3s;
+}
+
+nav a:hover {
+    opacity: 0.8;
+}
+
+.login-btn {
+    background-color: #F21137; 
+    padding: 10px 24px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.login-btn:hover {
+    background-color: #68020F; 
+}
+
+/* =========================================
+   3. HERO SPLIT-SCREEN (Arrow Design)
+========================================= */
+.split-container {
+    display: flex;
+    height: 100vh; 
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Left Side (Vivid Food Picture with Pointed Arrow Cut) */
+.left-side {
+    width: 58%;
+    height: 100%;
+    background-image: url('https://images.unsplash.com/photo-1580651315530-69c8e0026377?q=80&w=2070&auto=format&fit=crop'); 
+    background-size: cover;
+    background-position: center;
+    
+    /* Creates the arrowhead pointing right */
+    clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%); 
+    
+    filter: drop-shadow(15px 0 25px rgba(0, 0, 0, 0.6));
+    z-index: 2;
+}
+
+/* Right Side (Immersive Blurred Table) */
+.right-side {
+    width: 48%;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    overflow: hidden;
+}
+
+/* Blurred table background overlay */
+.right-side::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    
+    background-image: url('https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?q=80&w=2069&auto=format&fit=crop'); 
+    background-size: cover;
+    background-position: center;
+    
+    /* Blurs and darkens the background so the white text is readable */
+    filter: blur(10px) brightness(35%); 
+    transform: scale(1.1); 
+    z-index: -1; 
+}
+
+.content {
+    padding-left: 20%; 
+    padding-right: 8%;
+    max-width: 600px;
+}
+
+.eyebrow {
+    color: #F21137; 
+    font-size: 0.95rem;
+    font-weight: bold;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+}
+
+h1 {
+    font-size: 5rem;
+    margin-bottom: 20px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #FFFFFE; 
+    line-height: 1.1;
+}
+
+.content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    color: #FFFFFE; 
+    opacity: 0.85; 
+}
+
+/* Browse Button */
+.btn {
+    display: inline-block;
+    padding: 15px 40px;
+    background-color: #F21137; 
+    border: 2px solid #F21137;
+    color: #FFFFFE; 
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #68020F; 
+    border-color: #68020F;
+}
+
+/* =========================================
+   4. SCROLL DOWN SECTIONS
+========================================= */
+.info-section {
+    padding: 100px 40px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFFFFE; /* Keeps the dishes section bright */
+}
+
+/* =========================================
+   5. OUR DISHES (Floating Circular Plates)
+========================================= */
+.section-title {
+    text-align: center;
+    margin-bottom: 50px; 
+    width: 100%;
+}
+
+.section-title h2 {
+    font-size: 2.8rem;
+    color: #030303;
+    margin-bottom: 10px;
+}
+
+.divider {
+    color: #F21137; 
+    font-size: 1rem;
+    position: relative;
+    display: inline-block;
+}
+
+.divider::before, .divider::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 40px;
+    height: 1px;
+    background-color: rgba(242, 17, 55, 0.3);
+}
+
+.divider::before { right: 100%; margin-right: 15px; }
+.divider::after { left: 100%; margin-left: 15px; }
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 40px;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-top: 50px; 
+}
+
+.menu-card {
+    background-color: #FFFFFE; 
+    border-radius: 15px; 
+    text-align: center;
+    padding: 0 20px 30px 20px;
+    position: relative;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    margin-top: 60px; 
+    transition: transform 0.3s ease;
+    background: linear-gradient(135deg, rgba(242,17,55,0.03) 0%, #FFFFFE 40%);
+}
+
+.menu-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-image-wrapper {
+    margin-top: -60px; 
+    margin-bottom: 15px;
+}
+
+.card-image-wrapper img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%; 
+    object-fit: cover;
+    border: 5px solid #FFFFFE; 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.card-content h3 {
+    color: #030303; 
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.card-content p {
+    color: #666; 
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* =========================================
+   6. CONTACT & EMAIL SECTION
+========================================= */
+.bg-dark {
+    background-color: #030303; 
+    text-align: center;
+}
+
+.bg-dark h2 {
+    color: #F21137; 
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.bg-dark p {
+    color: #FFFFFE; 
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.contact-form input, 
+.contact-form textarea {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: #FFFFFE;
+    color: #030303;
+}
+
+.contact-form input:focus, 
+.contact-form textarea:focus {
+    outline: 3px solid #F21137;
+}

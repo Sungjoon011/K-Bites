@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-Bytes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 1. Top Navigation Bar (Transparent & Blurred) -->
+    <nav>
+        <div class="logo">
+            <a href="index.html">K-Bytes</a>
+        </div>
+        <ul>
+            <li><a href="#dishes">Our Dishes</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="login.html" class="login-btn">Login</a></li>
+        </ul>
+    </nav>
+
+    <!-- 2. Main Hero Section (Cinematic Arrow Split) -->
+    <header class="split-container">
+        <!-- Left Side: Sharp Vivid Food Picture -->
+        <div class="left-side"></div>
+        
+        <!-- Right Side: Blurred Table & Text Overlay -->
+        <div class="right-side">
+            <div class="content">
+                <h4 class="eyebrow">AUTHENTIC STREET FOOD</h4>
+                <h1>K-Bytes</h1>
+                <p>Experience the boldest, most authentic Korean street food. From spicy tteokbokki to crispy fried chicken, right to your screen.</p>
+                <a href="menu-public.html" class="btn">Browse Food</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. Our Dishes Section (Floating Plates) -->
+    <section id="dishes" class="info-section">
+        <div class="section-title">
+            <h2>Popular Dishes</h2>
+            <div class="divider">x</div> 
+        </div>
+        
+        <div class="menu-grid" id="home-menu-grid">
+            <div class="menu-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1580651315530-69c8e0026377?q=80&w=400&auto=format&fit=crop" alt="Spicy Tteokbokki">
+                </div>
+                <div class="card-content">
+                    <h3>Spicy Tteokbokki</h3>
+                    <p>Chewy rice cakes coated in our signature sweet and fiery sauce.</p>
+                </div>
+            </div>
+
+            <div class="menu-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1626804475297-41609ae0f4dc?q=80&w=400&auto=format&fit=crop" alt="Korean Fried Chicken">
+                </div>
+                <div class="card-content">
+                    <h3>Yangnyeom Chicken</h3>
+                    <p>Double-fried crispy chicken tossed in a sweet garlic glaze.</p>
+                </div>
+            </div>
+
+            <div class="menu-card">
+                <div class="card-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1617093727343-374698b1b08d?q=80&w=400&auto=format&fit=crop" alt="Bibimbap">
+                </div>
+                <div class="card-content">
+                    <h3>Classic Bibimbap</h3>
+                    <p>Mixed rice with fresh vegetables, beef, and a fried egg.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Contact & Email Section -->
+    <section id="contact" class="info-section bg-dark">
+        <h2>Contact Information</h2>
+        <p>Have questions about our menu or project? Send us an email below!</p>
+        
+        <form class="contact-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea rows="5" placeholder="Your Message" required></textarea>
+            <button type="submit" class="btn">Send Email</button>
+        </form>
+    </section>
+</body>
+</html>
