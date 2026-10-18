@@ -6,125 +6,141 @@
     <title>Admin Dashboard - K-Bytes</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="admin-page-body">
-    
-    <!-- Admin Navbar -->
-    <nav class="nav-solid admin-nav">
-        <div class="logo">
-            <a href="admin.html">K-Bytes <span class="admin-badge">ADMIN</span></a>
+<body class="admin-dashboard-body">
+
+    <!-- Sidebar Navigation -->
+    <aside class="admin-sidebar">
+        <div class="sidebar-logo">
+            <h2>K-Bytes <span class="admin-badge">ADMIN</span></h2>
         </div>
-        <ul>
-            <li><a href="admin.html">Dashboard</a></li>
-            <li><a href="home.html">View Live Site</a></li>
-            <li><a href="login.html" class="login-btn logout-btn">Logout</a></li>
+        <ul class="sidebar-menu">
+            <li><a href="#" class="sidebar-link active" data-target="section-add-dish">Add Dishes</a></li>
+            <li><a href="#" class="sidebar-link" data-target="section-accounts">Account Dashboard</a></li>
+            <li><a href="#" class="sidebar-link" data-target="section-transactions">Recent Transactions</a></li>
         </ul>
-    </nav>
-
-    <!-- Main Dashboard Container -->
-    <div class="admin-container">
-        
-        <!-- Add New Dish Form Card -->
-        <div class="admin-card">
-            <h2>Add New Dish</h2>
-            <form class="admin-form">
-                <div class="form-group">
-                    <label>Dish Name</label>
-                    <input type="text" placeholder="e.g., Jajangmyeon" required>
-                </div>
-                <div class="form-group">
-                    <label>Category</label>
-                    <select required>
-                        <option value="">Select a category</option>
-                        <option value="bap">Bap (Rice)</option>
-                        <option value="banchan">Banchan (Sides)</option>
-                        <option value="guk">Guk & Tang (Soups)</option>
-                        <option value="jjigae">Jjigae (Stews)</option>
-                        <option value="myeon">Myeon (Noodles)</option>
-                        <option value="gui">Gui (Grilled)</option>
-                        <option value="bokkeum">Bokkeum (Stir-fried)</option>
-                        <option value="jorim">Jorim (Braised)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Price (₱)</label>
-                    <input type="number" placeholder="0.00" required>
-                </div>
-                <div class="form-group">
-                    <label>Image URL</label>
-                    <input type="text" placeholder="https://..." required>
-                </div>
-                <div class="form-group full-width">
-                    <label>Description & Packaging Notes</label>
-                    <textarea rows="2" placeholder="e.g., Broth must be packed separately..." required></textarea>
-                </div>
-                <button type="submit" class="btn admin-submit-btn">Add to Database</button>
-            </form>
+        <div class="sidebar-footer">
+            <a href="home.html" class="sidebar-link">View Live Site</a>
+            <a href="login.html" class="sidebar-link logout-link" id="logout-btn">Logout</a>
         </div>
+    </aside>
 
-        <!-- Inventory Management Table Card -->
-        <div class="admin-card">
-            <h2>Current Inventory</h2>
-            <div class="table-responsive">
-                <table class="admin-table">
-                    <thead>
-                        <tr>
-                            <th>Image</th>
-                            <th>Dish Name</th>
-                            <th>Category</th>
-                            <th>Price</th>
-                            <th>In Stock</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Dummy Item 1 -->
-                        <tr>
-                            <td><img src="https://images.unsplash.com/photo-1580651315530-69c8e0026377?q=80&w=100&auto=format&fit=crop" class="admin-item-img" alt="Tteokbokki"></td>
-                            <td>Spicy Tteokbokki</td>
-                            <td>Bokkeum</td>
-                            <td>₱150.00</td>
-                            <td>
-                                <!-- Toggle Switch -->
-                                <label class="switch">
-                                  <input type="checkbox" checked>
-                                  <span class="slider round"></span>
-                                </label>
-                            </td>
-                            <td><button class="action-btn delete-btn">Delete</button></td>
-                        </tr>
-                        <!-- Dummy Item 2 -->
-                        <tr>
-                            <td><img src="https://images.unsplash.com/photo-1626804475297-41609ae0f4dc?q=80&w=100&auto=format&fit=crop" class="admin-item-img" alt="Chicken"></td>
-                            <td>Yangnyeom Chicken</td>
-                            <td>Gui</td>
-                            <td>₱220.00</td>
-                            <td>
-                                <label class="switch">
-                                  <input type="checkbox" checked>
-                                  <span class="slider round"></span>
-                                </label>
-                            </td>
-                            <td><button class="action-btn delete-btn">Delete</button></td>
-                        </tr>
-                        <!-- Dummy Item 3 (Mocked as Out of Stock) -->
-                        <tr>
-                            <td><img src="https://images.unsplash.com/photo-1617093727343-374698b1b08d?q=80&w=100&auto=format&fit=crop" class="admin-item-img" alt="Bibimbap"></td>
-                            <td>Classic Bibimbap</td>
-                            <td>Bap</td>
-                            <td>₱180.00</td>
-                            <td>
-                                <label class="switch">
-                                  <!-- Notice there is no 'checked' attribute here -->
-                                  <input type="checkbox">
-                                  <span class="slider round"></span>
-                                </label>
-                            </td>
-                            <td><button class="action-btn delete-btn">Delete</button></td>
-                        </tr>
-                    </tbody>
-                </table>
+    <!-- Main Content Area -->
+    <main class="admin-main-content">
+
+        <!-- SECTION 1: ADD DISHES -->
+        <section id="section-add-dish" class="admin-content-section active-section">
+            <div class="admin-card">
+                <h2>Add New Dish & Inventory Management</h2>
+                <form class="admin-form" id="add-dish-form">
+                    <div class="form-group">
+                        <label>Dish Name</label>
+                        <input type="text" id="dish-name" placeholder="e.g., Jajangmyeon" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="dish-category" required>
+                            <option value="">Select a category</option>
+                            <option value="bap">Bap (Rice)</option>
+                            <option value="banchan">Banchan (Sides)</option>
+                            <option value="guk">Guk & Tang (Soups)</option>
+                            <option value="jjigae">Jjigae (Stews)</option>
+                            <option value="myeon">Myeon (Noodles)</option>
+                            <option value="gui">Gui (Grilled)</option>
+                            <option value="bokkeum">Bokkeum (Stir-fried)</option>
+                            <option value="jorim">Jorim (Braised)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Price (₱)</label>
+                        <input type="number" id="dish-price" placeholder="0.00" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Image URL</label>
+                        <input type="text" id="dish-image" placeholder="https://..." required>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Description & Packaging Notes</label>
+                        <textarea id="dish-desc" rows="2" placeholder="e.g., Broth must be packed separately..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn admin-submit-btn">ADD TO DATABASE</button>
+                </form>
             </div>
-        </div>
-    </div>
+
+            <!-- Current Inventory Table -->
+            <div class="admin-card" style="margin-top: 30px;">
+                <h2>Current Inventory</h2>
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Dish Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>In Stock</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventory-table-body">
+                            <!-- Populated dynamically via script.js -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: ACCOUNT DASHBOARD -->
+        <section id="section-accounts" class="admin-content-section" style="display: none;">
+            <div class="admin-card">
+                <h2>User Account Dashboard</h2>
+                <p class="section-subtitle">Manage customer accounts and assign administrative roles.</p>
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Current Role</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="users-tbody">
+                            <!-- Populated dynamically via script.js -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: RECENT TRANSACTIONS -->
+        <section id="section-transactions" class="admin-content-section" style="display: none;">
+            <div class="admin-card">
+                <h2>Recent Customer Transactions</h2>
+                <p class="section-subtitle">Monitor incoming customer orders and payment statuses.</p>
+                <div class="table-responsive">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Items</th>
+                                <th>Total Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactions-table-body">
+                            <!-- Placeholder or dynamic data -->
+                            <tr>
+                                <td colspan="5" style="text-align: center; color: #777;">No recent transactions recorded yet.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <script src="script.js"></script>
 </body>
 </html>

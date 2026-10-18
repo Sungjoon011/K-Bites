@@ -17,17 +17,22 @@
             <h2 class="auth-title">Welcome Back</h2>
             <p class="auth-subtitle">Login to K-Bytes to order your favorites.</p>
             
-            <form class="auth-form">
+            <!-- Added id="login-form" -->
+            <form id="login-form" class="auth-form">
                 <div class="form-group">
                     <label>Email Address</label>
-                    <input type="email" placeholder="Enter your email" required>
+                    <!-- Added id="login-email" -->
+                    <input type="email" id="login-email" placeholder="Enter your email" required>
                 </div>
                 <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" placeholder="Enter your password" required>
+                <label>Password</label>
+                    <div class="password-container">
+                        <input type="password" id="login-password" placeholder="Enter your password" required>
+                        <button type="button" id="toggle-login-password" class="toggle-password-btn">Show</button>
+                    </div>
                 </div>
-                <!-- Links to the User Menu for mockup purposes -->
-                <a href="menu-user.html" class="btn auth-btn">Login</a>
+                <!-- Changed anchor link to an actual submit button -->
+                <button type="submit" class="btn auth-btn">Login</button>
             </form>
             
             <div class="auth-footer">
@@ -36,5 +41,7 @@
         </div>
     </div>
 
+    <!-- Linked script.js to handle the fetch request -->
+    <script src="script.js"></script>
 </body>
 </html>

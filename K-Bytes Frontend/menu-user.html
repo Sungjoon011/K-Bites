@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Menu - K-Bytes</title>
+    <title>User Menu - K-Bytes</title>
     <link rel="stylesheet" href="style.css">
 </head>
+<!-- Notice there is NO 'public-view' ID here, so the Add to Cart buttons will show up! -->
 <body class="menu-page-body">
     
-    <!-- Logged-In Navbar -->
+    <!-- User Navbar (Includes Cart and Logout) -->
     <nav class="nav-solid">
         <div class="logo">
             <a href="home.html">K-Bytes</a>
@@ -16,181 +17,85 @@
         <ul>
             <li><a href="home.html">Home</a></li>
             <li><a href="#contact">Contact</a></li>
-            <!-- Cart & Logout for the User View -->
-            <li><a href="#" class="cart-nav-btn">🛒 Cart <span class="cart-badge">3</span></a></li>
-            <li><a href="home.html" class="login-btn logout-btn">Logout</a></li>
+            <li>
+                <!-- Cart Trigger Button -->
+                <button class="cart-nav-btn">
+                    🛒 Cart <span class="cart-badge">0</span>
+                </button>
+            </li>
+            <li><a href="home.html" class="login-btn">Logout</a></li>
         </ul>
     </nav>
 
-    <!-- Top Promo Banner -->
+    <!-- Top Banner -->
     <header class="menu-banner">
-        <div class="banner-content">
-            <h2>Taste the Streets of Seoul</h2>
-            <p>Experience our most popular late-night cravings.</p>
-        </div>
+        <h2>Taste the Streets of Seoul</h2>
+        <p>Experience our most popular late-night cravings.</p>
     </header>
 
-    <!-- Category Filter Row -->
-    <section class="menu-categories">
-        <button class="category-btn active">All Categories</button>
-        <button class="category-btn">Bap (Rice)</button>
-        <button class="category-btn">Banchan (Sides)</button>
-        <button class="category-btn">Guk & Tang (Soups)</button>
-        <button class="category-btn">Jjigae (Stews)</button>
-        <button class="category-btn">Myeon (Noodles)</button>
-        <button class="category-btn">Gui (Grilled)</button>
-        <button class="category-btn">Bokkeum (Stir-fried)</button>
-        <button class="category-btn">Jorim (Braised)</button>
-    </section>
-
-    <!-- Trending Products Carousel (User Version with Add Buttons) -->
-    <section class="menu-items-section">
-        <div class="section-title">
-            <h2>Trending Dishes</h2>
-            <div class="divider">x</div> 
-        </div>
+    <!-- The 2-Column App Layout -->
+    <section class="app-layout">
         
-        <div class="carousel-container">
-            <button class="scroll-btn left-btn" onclick="document.getElementById('user-menu-carousel').scrollBy({left: -300, behavior: 'smooth'})">&#10094;</button>
-            
-            <div class="menu-carousel" id="user-menu-carousel">
-                
-                <!-- User Card 1 -->
-                <div class="compact-card">
-                    <div class="compact-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1580651315530-69c8e0026377?q=80&w=200&auto=format&fit=crop" alt="Spicy Tteokbokki">
-                    </div>
-                    <div class="compact-content">
-                        <h3>Spicy Tteokbokki</h3>
-                        <p>Chewy rice cakes in fiery sauce.</p>
-                        <div class="price-row">
-                            <h4 class="compact-price">₱150.00</h4>
-                            <button class="add-cart-btn">+</button>
-                        </div>
-                    </div>
-                </div>
+        <!-- Left Sidebar Menu -->
+        <aside class="app-sidebar">
+            <h2 class="sidebar-title">Menu</h2>
+            <ul class="sidebar-list">
+                <li><button class="sidebar-btn active" data-category="All">🍔 All Categories</button></li>
+                <li><button class="sidebar-btn" data-category="Bap">🍚 Bap (Rice)</button></li>
+                <li><button class="sidebar-btn" data-category="Banchan">🥬 Banchan (Sides)</button></li>
+                <li><button class="sidebar-btn" data-category="Guk & Tang">🥣 Guk & Tang</button></li>
+                <li><button class="sidebar-btn" data-category="Jjigae">🥘 Jjigae (Stews)</button></li>
+                <li><button class="sidebar-btn" data-category="Myeon">🍜 Myeon (Noodles)</button></li>
+                <li><button class="sidebar-btn" data-category="Gui">🥓 Gui (Grilled)</button></li>
+                <li><button class="sidebar-btn" data-category="Bokkeum">🌶️ Bokkeum</button></li>
+                <li><button class="sidebar-btn" data-category="Jorim">🍗 Jorim (Braised)</button></li>
+            </ul>
+        </aside>
 
-                <!-- User Card 2 -->
-                <div class="compact-card">
-                    <div class="compact-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1626804475297-41609ae0f4dc?q=80&w=200&auto=format&fit=crop" alt="Korean Fried Chicken">
-                    </div>
-                    <div class="compact-content">
-                        <h3>Yangnyeom Chicken</h3>
-                        <p>Crispy chicken in sweet garlic glaze.</p>
-                        <div class="price-row">
-                            <h4 class="compact-price">₱220.00</h4>
-                            <button class="add-cart-btn">+</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- User Card 3 -->
-                <div class="compact-card">
-                    <div class="compact-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1617093727343-374698b1b08d?q=80&w=200&auto=format&fit=crop" alt="Bibimbap">
-                    </div>
-                    <div class="compact-content">
-                        <h3>Classic Bibimbap</h3>
-                        <p>Mixed rice with beef and veggies.</p>
-                        <div class="price-row">
-                            <h4 class="compact-price">₱180.00</h4>
-                            <button class="add-cart-btn">+</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- User Card 4 -->
-                <div class="compact-card">
-                    <div class="compact-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1552611052-33e04de081de?q=80&w=200&auto=format&fit=crop" alt="Ramen">
-                    </div>
-                    <div class="compact-content">
-                        <h3>Spicy Ramyeon</h3>
-                        <p>Rich broth with thick noodles.</p>
-                        <div class="price-row">
-                            <h4 class="compact-price">₱120.00</h4>
-                            <button class="add-cart-btn">+</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- User Card 5 -->
-                <div class="compact-card">
-                    <div class="compact-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=200&auto=format&fit=crop" alt="Pork BBQ">
-                    </div>
-                    <div class="compact-content">
-                        <h3>Pork Bulgogi</h3>
-                        <p>Marinated grilled pork slices.</p>
-                        <div class="price-row">
-                            <h4 class="compact-price">₱250.00</h4>
-                            <button class="add-cart-btn">+</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- User Card 6 -->
-                <div class="compact-card">
-                    <div class="compact-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=200&auto=format&fit=crop" alt="Sushi Roll">
-                    </div>
-                    <div class="compact-content">
-                        <h3>Kimbap Roll</h3>
-                        <p>Seaweed rice roll with veggies.</p>
-                        <div class="price-row">
-                            <h4 class="compact-price">₱130.00</h4>
-                            <button class="add-cart-btn">+</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- User Card 7 -->
-                <div class="compact-card">
-                    <div class="compact-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?q=80&w=200&auto=format&fit=crop" alt="Dumplings">
-                    </div>
-                    <div class="compact-content">
-                        <h3>Mandu (Dumplings)</h3>
-                        <p>Steamed pork and chive dumplings.</p>
-                        <div class="price-row">
-                            <h4 class="compact-price">₱110.00</h4>
-                            <button class="add-cart-btn">+</button>
-                        </div>
-                    </div>
-                </div>
-
+        <!-- Right Main Content -->
+        <main class="app-main">
+            <!-- Search Bar -->
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="🔍 Search Menu Here...">
             </div>
             
-            <button class="scroll-btn right-btn" onclick="document.getElementById('user-menu-carousel').scrollBy({left: 300, behavior: 'smooth'})">&#10095;</button>
-        </div>
+            <h2 id="category-display-title">All Categories</h2>
+            
+            <!-- The Grid Container -->
+            <div id="food-grid" class="app-grid">
+                <!-- JavaScript will automatically inject the dishes and Add buttons here -->
+            </div>
+        </main>
+
     </section>
 
-    <!-- ==========================================
-         CART SIDEBAR (Hidden by default) 
-         ========================================== -->
-    <div id="cart-overlay" class="cart-overlay"></div>
-    <div id="cart-sidebar" class="cart-sidebar">
+    <!-- ========================================== -->
+    <!-- HIDDEN CART SIDEBAR (Slides in when clicked) -->
+    <!-- ========================================== -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+
+    <aside class="cart-sidebar" id="cart-sidebar">
         <div class="cart-header">
-            <h2>Your Order</h2>
-            <button id="close-cart" class="close-btn">&times;</button>
+            <h2>Your Cart</h2>
+            <button class="close-btn" id="close-cart">&times;</button>
         </div>
-        <div id="cart-items" class="cart-items">
-            <!-- JavaScript will inject cart items here -->
+        
+        <div class="cart-items" id="cart-items">
+            <!-- JS injects cart items here -->
             <p class="empty-cart-msg">Your cart is empty.</p>
         </div>
+        
         <div class="cart-footer">
             <div class="cart-total">
                 <span>Total:</span>
                 <span id="cart-total-price">₱0.00</span>
             </div>
-            <button class="btn checkout-btn">Proceed to Checkout</button>
-            <button id="clear-cart-btn" class="clear-cart-btn">Clear Cart</button>
+            <!-- Uses your original .btn styling for the bright red button -->
+            <button class="btn checkout-btn" id="checkout-btn">PROCEED TO CHECKOUT</button>
+            <button class="clear-cart-btn" id="clear-cart-btn">Clear Cart</button>
         </div>
-    </div>
+    </aside>
 
-    <!-- Link to our new logic file -->
     <script src="script.js"></script>
-
 </body>
 </html>
