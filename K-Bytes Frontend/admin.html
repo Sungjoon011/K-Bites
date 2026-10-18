@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - K-Bytes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="admin-page-body">
+    
+    <!-- Admin Navbar -->
+    <nav class="nav-solid admin-nav">
+        <div class="logo">
+            <a href="admin.html">K-Bytes <span class="admin-badge">ADMIN</span></a>
+        </div>
+        <ul>
+            <li><a href="admin.html">Dashboard</a></li>
+            <li><a href="home.html">View Live Site</a></li>
+            <li><a href="login.html" class="login-btn logout-btn">Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Dashboard Container -->
+    <div class="admin-container">
+        
+        <!-- Add New Dish Form Card -->
+        <div class="admin-card">
+            <h2>Add New Dish</h2>
+            <form class="admin-form">
+                <div class="form-group">
+                    <label>Dish Name</label>
+                    <input type="text" placeholder="e.g., Jajangmyeon" required>
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <select required>
+                        <option value="">Select a category</option>
+                        <option value="bap">Bap (Rice)</option>
+                        <option value="banchan">Banchan (Sides)</option>
+                        <option value="guk">Guk & Tang (Soups)</option>
+                        <option value="jjigae">Jjigae (Stews)</option>
+                        <option value="myeon">Myeon (Noodles)</option>
+                        <option value="gui">Gui (Grilled)</option>
+                        <option value="bokkeum">Bokkeum (Stir-fried)</option>
+                        <option value="jorim">Jorim (Braised)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Price (₱)</label>
+                    <input type="number" placeholder="0.00" required>
+                </div>
+                <div class="form-group">
+                    <label>Image URL</label>
+                    <input type="text" placeholder="https://..." required>
+                </div>
+                <div class="form-group full-width">
+                    <label>Description & Packaging Notes</label>
+                    <textarea rows="2" placeholder="e.g., Broth must be packed separately..." required></textarea>
+                </div>
+                <button type="submit" class="btn admin-submit-btn">Add to Database</button>
+            </form>
+        </div>
+
+        <!-- Inventory Management Table Card -->
+        <div class="admin-card">
+            <h2>Current Inventory</h2>
+            <div class="table-responsive">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Dish Name</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>In Stock</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Dummy Item 1 -->
+                        <tr>
+                            <td><img src="https://images.unsplash.com/photo-1580651315530-69c8e0026377?q=80&w=100&auto=format&fit=crop" class="admin-item-img" alt="Tteokbokki"></td>
+                            <td>Spicy Tteokbokki</td>
+                            <td>Bokkeum</td>
+                            <td>₱150.00</td>
+                            <td>
+                                <!-- Toggle Switch -->
+                                <label class="switch">
+                                  <input type="checkbox" checked>
+                                  <span class="slider round"></span>
+                                </label>
+                            </td>
+                            <td><button class="action-btn delete-btn">Delete</button></td>
+                        </tr>
+                        <!-- Dummy Item 2 -->
+                        <tr>
+                            <td><img src="https://images.unsplash.com/photo-1626804475297-41609ae0f4dc?q=80&w=100&auto=format&fit=crop" class="admin-item-img" alt="Chicken"></td>
+                            <td>Yangnyeom Chicken</td>
+                            <td>Gui</td>
+                            <td>₱220.00</td>
+                            <td>
+                                <label class="switch">
+                                  <input type="checkbox" checked>
+                                  <span class="slider round"></span>
+                                </label>
+                            </td>
+                            <td><button class="action-btn delete-btn">Delete</button></td>
+                        </tr>
+                        <!-- Dummy Item 3 (Mocked as Out of Stock) -->
+                        <tr>
+                            <td><img src="https://images.unsplash.com/photo-1617093727343-374698b1b08d?q=80&w=100&auto=format&fit=crop" class="admin-item-img" alt="Bibimbap"></td>
+                            <td>Classic Bibimbap</td>
+                            <td>Bap</td>
+                            <td>₱180.00</td>
+                            <td>
+                                <label class="switch">
+                                  <!-- Notice there is no 'checked' attribute here -->
+                                  <input type="checkbox">
+                                  <span class="slider round"></span>
+                                </label>
+                            </td>
+                            <td><button class="action-btn delete-btn">Delete</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

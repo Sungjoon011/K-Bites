@@ -325,3 +325,716 @@ h1 {
 .contact-form textarea:focus {
     outline: 3px solid #F21137;
 }
+
+/*=========================================*/
+/* =========================================
+   7. MENU PAGE SPECIFICS
+========================================= */
+.menu-page-body {
+    background-color: #FFFFFE; /* Clean bright background */
+    color: #030303;
+    overflow-x: hidden;
+}
+
+/* Overrides the transparent fixed nav for inner pages */
+.nav-solid {
+    background-color: #030303; /* Solid black */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    position: relative; /* Allows it to scroll normally */
+    border-bottom: 3px solid #F21137;
+}
+
+/* Top Promo Banner */
+.menu-banner {
+    background-color: #68020F; /* Palette Dark Red */
+    background-image: linear-gradient(45deg, #030303 0%, #68020F 100%);
+    padding: 60px 40px;
+    text-align: center;
+    border-radius: 15px;
+    margin: 40px auto;
+    max-width: 1100px;
+    color: #FFFFFE;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.menu-banner h2 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.menu-banner p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* Category Filter Row */
+.menu-categories {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 50px 0 20px 0;
+    flex-wrap: wrap;
+    padding: 0 20px;
+}
+
+.category-btn {
+    padding: 12px 30px;
+    background-color: #FFFFFE;
+    border: 2px solid #E0E0E0;
+    border-radius: 30px;
+    color: #030303;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.category-btn:hover, 
+.category-btn.active {
+    background-color: #F21137; /* Palette Bright Red */
+    border-color: #F21137;
+    color: #FFFFFE;
+    box-shadow: 0 5px 15px rgba(242, 17, 55, 0.3);
+}
+
+/* Menu Grid Spacing */
+.menu-items-section {
+    padding: 20px 40px 100px 40px;
+}
+
+/* Price Styling for Cards */
+.price {
+    color: #F21137; /* Palette Bright Red */
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+/* =========================================
+   8. COMPACT CAROUSEL MENU (6 Per Line)
+========================================= */
+
+.carousel-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+/* Arrow Buttons (Updated for absolute positioning) */
+.scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); /* Perfectly centers them vertically */
+    background-color: #FFFFFE;
+    border: 2px solid #F21137;
+    color: #F21137;
+    font-size: 1.2rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.scroll-btn:hover {
+    background-color: #F21137;
+    color: #FFFFFE;
+}
+
+.left-btn { left: -50px; }
+.right-btn { right: -50px; }
+
+/* The Horizontal Scroll Area */
+.menu-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    gap: 15px;
+    padding: 50px 10px 40px 10px; /* Top padding is for the protruding plate */
+    width: 100%;
+}
+
+/* Hide default scrollbar for cleaner look */
+.menu-carousel::-webkit-scrollbar { display: none; }
+.menu-carousel { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Shrinking the Card to fit 6 per line */
+.compact-card {
+    flex: 0 0 170px; /* Locks card width so exactly 6 fit in ~1100px */
+    scroll-snap-align: start;
+    background-color: #FFFFFE; 
+    border-radius: 12px; 
+    text-align: center;
+    padding: 0 12px 20px 12px;
+    position: relative;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+    margin-top: 45px; 
+    transition: transform 0.3s ease;
+    background: linear-gradient(135deg, rgba(242,17,55,0.03) 0%, #FFFFFE 40%);
+}
+
+.compact-card:hover { transform: translateY(-5px); }
+
+.compact-image-wrapper {
+    margin-top: -45px; /* Adjusts for smaller image */
+    margin-bottom: 10px;
+}
+
+.compact-image-wrapper img {
+    width: 90px;  /* Shrunk from 140px */
+    height: 90px; /* Shrunk from 140px */
+    border-radius: 50%; 
+    object-fit: cover;
+    border: 4px solid #FFFFFE; 
+    box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+}
+
+.compact-content h3 {
+    color: #030303; 
+    font-size: 1rem;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.compact-content p {
+    color: #666; 
+    font-size: 0.8rem;
+    line-height: 1.3;
+    /* Optional: Prevents description from getting too tall */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+}
+
+.compact-price {
+    color: #F21137; 
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* =========================================
+   9. ADMIN DASHBOARD SPECIFICS
+========================================= */
+.admin-page-body {
+    background-color: #f4f4f4; /* Light gray background so white cards pop */
+    color: #030303;
+}
+
+/* Little red badge on the logo */
+.admin-badge {
+    background-color: #F21137;
+    color: #FFFFFE;
+    font-size: 0.7rem;
+    padding: 3px 8px;
+    border-radius: 12px;
+    vertical-align: top;
+    margin-left: 5px;
+}
+
+.admin-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px 100px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.admin-card {
+    background-color: #FFFFFE;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.admin-card h2 {
+    margin-bottom: 25px;
+    color: #68020F; /* Palette Dark Red */
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
+    font-size: 1.8rem;
+}
+
+/* Form Styling (Grid Layout) */
+.admin-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full-width {
+    grid-column: span 2;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #fafafa;
+    color: #030303;
+}
+
+.form-group input:focus, 
+.form-group select:focus, 
+.form-group textarea:focus {
+    outline: 2px solid #F21137; /* Palette Bright Red */
+    border-color: transparent;
+}
+
+.admin-submit-btn {
+    grid-column: span 2;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* Table Styling */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    min-width: 700px;
+}
+
+.admin-table th, 
+.admin-table td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+}
+
+.admin-table th {
+    background-color: #f9f9f9;
+    font-weight: bold;
+    color: #333;
+}
+
+.admin-item-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 2px solid #eee;
+}
+
+.action-btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.85rem;
+    transition: background 0.3s;
+}
+
+.delete-btn {
+    background-color: #ffebee; /* Very light red */
+    color: #F21137;
+}
+
+.delete-btn:hover {
+    background-color: #F21137;
+    color: #FFFFFE;
+}
+
+/* Custom Animated Toggle Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #F21137; /* Palette Bright Red */
+}
+
+input:checked + .slider:before {
+    transform: translateX(20px);
+}
+
+.slider.round {
+    border-radius: 24px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* =========================================
+   10. LOGIN & AUTHENTICATION PAGE
+========================================= */
+.login-page-body {
+    /* Reuses the busy table image but darkens it for auth */
+    background-image: url('https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?q=80&w=2069&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Dark blurred overlay to make the white card pop */
+.login-page-body::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(3, 3, 3, 0.75); 
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 0;
+}
+
+.back-home {
+    position: absolute;
+    top: 30px;
+    left: 40px;
+    color: #FFFFFE; /* Palette Off-White */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    z-index: 10;
+    transition: color 0.3s;
+}
+
+.back-home:hover {
+    color: #F21137; /* Palette Bright Red */
+}
+
+.auth-wrapper {
+    z-index: 1;
+    width: 100%;
+    max-width: 420px;
+    padding: 20px;
+}
+
+.auth-card {
+    background-color: #FFFFFE;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    text-align: center;
+}
+
+.auth-title {
+    color: #030303; /* Palette Almost Black */
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.auth-subtitle {
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+}
+
+.auth-form .form-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.auth-btn {
+    width: 100%;
+    margin-top: 10px;
+    text-align: center; /* Centers text since it's an <a> tag acting like a button */
+    display: block;
+}
+
+.auth-footer {
+    margin-top: 25px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.auth-link {
+    color: #F21137;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.auth-link:hover {
+    color: #68020F; /* Palette Dark Red */
+    text-decoration: underline;
+}
+
+/* =========================================
+   11. USER MENU SPECIFICS (Cart & Buttons)
+========================================= */
+
+/* The Add to Cart Button Row */
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid #eee; /* Light divider above the price */
+}
+
+/* Adjusting the previous price margin so it sits flush in the row */
+.compact-price {
+    margin-top: 0; 
+}
+
+.add-cart-btn {
+    background-color: #030303; /* Palette Almost Black */
+    color: #FFFFFE;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 1.4rem; /* Slightly larger plus sign */
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0; /* Removes default browser padding */
+    padding-bottom: 5px; /* Optical adjustment: bumps the + up to true center */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.add-cart-btn:hover {
+    background-color: #F21137; /* Palette Bright Red */
+    transform: scale(1.1);
+    padding-bottom: 10px; /* Keeps the + centered even when scaled */
+}
+
+/* Cart Button in Navbar */
+.cart-nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: rgba(255, 255, 254, 0.1);
+    padding: 8px 15px;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+}
+
+.cart-nav-btn:hover {
+    background-color: rgba(255, 255, 254, 0.2);
+}
+
+.cart-badge {
+    background-color: #F21137; /* Palette Bright Red */
+    color: #FFFFFE;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 12px;
+}
+
+/* =========================================
+   12. SLIDING CART SIDEBAR
+========================================= */
+.cart-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: rgba(3, 3, 3, 0.6);
+    z-index: 999;
+    display: none; /* Hidden until toggled */
+    backdrop-filter: blur(3px);
+}
+
+.cart-overlay.show { display: block; }
+
+.cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -450px; /* Hides it off the right side of the screen */
+    width: 100%;
+    max-width: 400px;
+    height: 100vh;
+    background-color: #FFFFFE;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.2);
+    z-index: 1000;
+    transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-sidebar.open { right: 0; /* Slides it in */ }
+
+.cart-header {
+    padding: 20px 30px;
+    background-color: #F21137; /* Palette Bright Red */
+    color: #FFFFFE;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: #FFFFFE;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.cart-items {
+    padding: 30px;
+    flex-grow: 1;
+    overflow-y: auto;
+    color: #030303;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    font-weight: bold;
+}
+
+.cart-footer {
+    padding: 30px;
+    border-top: 1px solid #eee;
+    background-color: #fafafa;
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #030303;
+}
+
+.checkout-btn { width: 100%; text-align: center; }
+
+/* =========================================
+   13. CART QUANTITY CONTROLS & CLEAR BUTTON
+========================================= */
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Ensures everything vertically aligns */
+}
+
+.cart-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cart-item-title {
+    font-weight: bold;
+    color: #030303;
+}
+
+.qty-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.qty-btn {
+    background-color: #eee;
+    color: #030303;
+    border: none;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 2px; /* Optical center adjustment */
+    transition: background-color 0.2s;
+}
+
+.qty-btn:hover {
+    background-color: #ccc;
+}
+
+.cart-item-price {
+    font-weight: bold;
+    color: #F21137;
+    font-size: 1.1rem;
+}
+
+.clear-cart-btn {
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px;
+    background: none;
+    border: 2px solid #eee;
+    color: #666;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.clear-cart-btn:hover {
+    background-color: #ffebee;
+    color: #F21137;
+    border-color: #F21137;
+}
