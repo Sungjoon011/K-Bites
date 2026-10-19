@@ -257,6 +257,6 @@ app.listen(PORT, () => {
     console.log(`🚀 Server listening on port ${PORT}`);
 });
 
-mongoose.connect('mongodb+srv://lee294829_db_user:KBytes@cluster0.rl9gp0r.mongodb.net/kbytes')
+mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('✅ Connected to MongoDB successfully'))
   .catch((err) => console.log('❌ MongoDB connection error:', err));    
