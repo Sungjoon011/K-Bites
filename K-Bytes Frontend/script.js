@@ -1,5 +1,6 @@
 const API_URL = 'http://localhost:3000/api/products';
-let cart = [];
+// 1. Initialize cart from localStorage so it persists across pages
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let allDishes = [];
 
 // ==========================================
@@ -127,7 +128,7 @@ function attachCartListeners() {
 
             const existingItem = cart.find(item => item.name === name);
             if (existingItem) existingItem.quantity += 1;
-            else cart.push({ name: name, price: price, quantity: 1 });
+            else cart.push({ name: name, price: price, quantity: 1, image: card.querySelector('img').src });
 
             updateCartUI();
             
@@ -142,6 +143,9 @@ function attachCartListeners() {
 }
 
 function updateCartUI() {
+    // 2. Save cart to localStorage every time it updates
+    localStorage.setItem('cart', JSON.stringify(cart));
+    
     if(!cartBadge || !cartItemsContainer) return;
     
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -504,57 +508,22 @@ if (logoutBtn) {
 }
 
 // ==========================================
-// CHECKOUT LOGIC WITH PAYMONGO
+// 3. CHECKOUT REDIRECT LOGIC
 // ==========================================
 if (checkoutBtn) {
-    checkoutBtn.addEventListener('click', async () => {
+    checkoutBtn.addEventListener('click', () => {
         if (cart.length === 0) {
             alert("Your cart is empty!");
             return;
         }
-
-        const customerName = localStorage.getItem('userName') || 'Customer';
-        const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-
-        try {
-            checkoutBtn.innerText = 'Processing...';
-            checkoutBtn.disabled = true;
-
-            const response = await fetch('http://localhost:3000/api/create-checkout-session', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ items: cart, customerName })
-            });
-
-            const data = await response.json();
-
-            if (response.ok && data.checkoutUrl) {
-                // Save pending order temporarily in sessionStorage before redirecting
-                sessionStorage.setItem('pendingOrder', JSON.stringify({
-                    customerName,
-                    items: cart,
-                    totalAmount
-                }));
-
-                window.location.href = data.checkoutUrl; 
-            } else {
-                alert(`❌ Checkout failed: ${data.message || 'Unknown error'}`);
-                checkoutBtn.innerText = 'Proceed to Checkout';
-                checkoutBtn.disabled = false;
-            }
-        } catch (error) {
-            console.error("Checkout network error:", error);
-            alert("❌ Server error connecting to payment gateway.");
-            checkoutBtn.innerText = 'Proceed to Checkout';
-            checkoutBtn.disabled = false;
-        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        window.location.href = 'checkout.html';
     });
 }
 
 // ==========================================
 // BOOT UP ENGINE & SUCCESS HANDLER
 // ==========================================
-
 document.addEventListener('DOMContentLoaded', async () => {
     const urlParams = new URLSearchParams(window.location.search);
     
@@ -580,6 +549,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         cart = [];
         updateCartUI();
+        // 4. Clear the cart from localStorage so it empties out after paying
+        localStorage.removeItem('cart');
         window.history.replaceState({}, document.title, window.location.pathname);
     } else if (urlParams.get('payment') === 'cancelled') {
         alert('⚠️ Payment was cancelled.');

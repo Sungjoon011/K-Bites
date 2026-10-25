@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - K-Bites</title>
+    <!-- We embed specific styles here to match your reference photo perfectly -->
+    <style>
+        body { 
+            background-color: #fff; 
+            color: #111; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0; padding: 0;
+        }
+        .checkout-wrapper { 
+            max-width: 1100px; 
+            margin: 50px auto; 
+            padding: 0 20px; 
+        }
+        .checkout-header { margin-bottom: 40px; }
+        .checkout-header h1 { font-size: 32px; margin: 0 0 8px 0; font-weight: 700; }
+        .checkout-header p { color: #666; margin: 0; font-size: 15px; }
+        
+        .checkout-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 80px; 
+        }
+
+        /* --- Left Column: Accordions & Forms --- */
+        .accordion-item { border-bottom: 1px solid #eaeaea; padding: 25px 0; }
+        .accordion-item:first-child { padding-top: 0; }
+        .accordion-header { 
+            display: flex; justify-content: space-between; 
+            font-weight: 600; font-size: 17px; margin-bottom: 15px;
+        }
+        .accordion-content p { font-size: 14px; color: #666; margin: 0 0 15px 0; }
+        
+        .input-field { 
+            width: 100%; padding: 14px; border: 1px solid #ddd; 
+            border-radius: 6px; margin-bottom: 15px; box-sizing: border-box; 
+            font-size: 14px;
+        }
+        .btn-black { 
+            background: #000; color: #fff; padding: 16px; border: none; 
+            width: 100%; font-size: 15px; cursor: pointer; border-radius: 6px; font-weight: 600; 
+        }
+        .btn-black:disabled { background: #e0e0e0; color: #a0a0a0; cursor: not-allowed; }
+        .btn-black:hover:not(:disabled) { background: #333; }
+        
+        .btn-outline { 
+            background: transparent; color: #000; border: 1px solid #ddd; 
+            padding: 14px; cursor: pointer; border-radius: 6px; width: 100%; font-weight: 500;
+        }
+        .btn-outline:hover { border-color: #000; }
+
+        /* --- Right Column: Cart Summary --- */
+        .summary-section h2 { font-size: 17px; margin: 0 0 25px 0; font-weight: 600; }
+        
+        .cart-item-row { 
+            display: flex; align-items: flex-start; margin-bottom: 25px; 
+            padding-bottom: 25px; border-bottom: 1px solid #eaeaea; 
+        }
+        .cart-item-img { 
+            width: 70px; height: 70px; background: #f5f5f5; 
+            border-radius: 8px; object-fit: cover; margin-right: 20px; 
+        }
+        .cart-item-details { flex-grow: 1; }
+        .title-price-row { display: flex; justify-content: space-between; margin-bottom: 8px; }
+        .cart-item-title { font-weight: 600; font-size: 14px; }
+        .cart-item-price { font-weight: 600; font-size: 14px; }
+        
+        .qty-control-wrapper { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+        .qty-box { 
+            display: flex; align-items: center; border: 1px solid #ddd; 
+            border-radius: 4px; overflow: hidden;
+        }
+        .qty-box button { 
+            background: none; border: none; padding: 6px 12px; cursor: pointer; font-size: 14px;
+        }
+        .qty-box button:hover { background: #f9f9f9; }
+        .qty-box span { padding: 0 10px; font-size: 13px; font-weight: 500; }
+        .trash-btn { background: none; border: none; cursor: pointer; font-size: 16px; opacity: 0.6; }
+        .trash-btn:hover { opacity: 1; color: red; }
+        
+        .totals-row { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 14px; }
+        .totals-row.total { font-weight: 700; font-size: 20px; margin-top: 25px; border-top: 1px solid #eaeaea; padding-top: 25px; }
+
+        @media (max-width: 768px) {
+            .checkout-grid { grid-template-columns: 1fr; gap: 40px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="checkout-wrapper">
+        <div class="checkout-header">
+            <h1>Checkout</h1>
+            <p>Complete your purchase securely</p>
+        </div>
+        
+        <div class="checkout-grid">
+            <!-- Left Column: Forms & Delivery -->
+            <div class="form-section">
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">Contact Information <span style="color: #ccc;">-</span></div>
+                    <div class="accordion-content">
+                        <input type="text" id="customer-name" class="input-field" placeholder="Full Name" value="">
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">Delivery Method <span style="color: #ccc;">+</span></div>
+                    <div class="accordion-content"> 
+                        <p>Calculate your precise delivery fee based on your distance from our store in Bohol.</p>
+                        <button id="get-location-btn" class="btn-outline">📍 Detect My Location</button>
+                        <div id="delivery-info" style="margin-top: 12px; font-size: 14px; color: #28a745; font-weight: 500;"></div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">Payment <span style="color: #ccc;">+</span></div>
+                    <div class="accordion-content">
+                        <p>Proceed to PayMongo to securely pay via GCash, Maya, or Card.</p>
+                        <button id="proceed-paymongo-btn" class="btn-black" disabled>Continue to Payment</button>
+                    </div>
+                </div>
+                
+            </div>
+
+            <!-- Right Column: Cart Summary -->
+            <div class="summary-section">
+                <h2>Your Cart</h2>
+                <div id="checkout-items-container">
+                    <!-- Populated dynamically by JS -->
+                </div>
+                
+                <div style="margin-top: 40px;">
+                    <div class="totals-row">
+                        <span style="color: #666;">Subtotal</span>
+                        <span id="subtotal-price" style="font-weight: 500;">₱0.00</span>
+                    </div>
+                    <div class="totals-row">
+                        <span style="color: #666;">Delivery Fee</span>
+                        <span id="delivery-fee-display" style="font-weight: 500;">Calculated on left</span>
+                    </div>
+                    <div class="totals-row total">
+                        <span>Total</span>
+                        <span id="final-total-price">₱0.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="checkout.js"></script>
+</body>
+</html> 

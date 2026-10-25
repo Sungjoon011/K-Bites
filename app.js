@@ -36,6 +36,7 @@ const User = mongoose.model('User', userSchema);
 const orderSchema = new mongoose.Schema({
     items: Array,
     totalAmount: Number,
+    deliveryFee: { type: Number, default: 0 },
     customerName: { type: String, default: 'Customer' }
 }, { timestamps: true });
 const Order = mongoose.model('Order', orderSchema);
@@ -172,13 +173,58 @@ app.put('/api/products/:id', async (req, res) => {
     }
 });
 
+// Haversine formula to calculate distance between two lat/lng pairs in kilometers
+function calculateDistanceInKm(lat1, lon1, lat2, lon2) {
+    const R = 6371; // Earth's radius in km
+    const dLat = (lat2 - lat1) * (Math.PI / 180);
+    const dLon = (lon2 - lon1) * (Math.PI / 180);
+    const a = 
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) * 
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c; // Distance in kilometers
+}
+
+app.post('/api/calculate-delivery', (req, res) => {
+    const { customerLat, customerLng } = req.body;
+
+    if (!customerLat || !customerLng) {
+        return res.status(400).json({ message: "Customer coordinates are required." });
+    }
+
+    const storeLat = parseFloat(process.env.STORE_LAT);
+    const storeLng = parseFloat(process.env.STORE_LNG);
+
+    const distanceKm = calculateDistanceInKm(storeLat, storeLng, parseFloat(customerLat), parseFloat(customerLng));
+
+    // Fee structure: Base fee of ₱49 for the first 2 km, then ₱15 per extra km
+    const baseFee = 49;
+    const ratePerKm = 15;
+    
+    let deliveryFee = baseFee;
+    if (distanceKm > 2) {
+        deliveryFee += (distanceKm - 2) * ratePerKm;
+    }
+
+    res.json({
+        distanceKm: distanceKm.toFixed(2),
+        deliveryFee: Math.round(deliveryFee)
+    });
+});
+
 // ==========================================
 // API ROUTES: ORDERS & TRANSACTIONS
 // ==========================================
 app.post('/api/orders', async (req, res) => {
     try {
-        const { items, totalAmount, customerName } = req.body;
-        const newOrder = await Order.create({ items, totalAmount, customerName: customerName || 'Customer' });
+        const { items, totalAmount, deliveryFee, customerName } = req.body;
+        const newOrder = await Order.create({ 
+            items, 
+            totalAmount, 
+            deliveryFee: deliveryFee || 0, 
+            customerName: customerName || 'Customer' 
+        });
         res.status(201).json({ message: "Order placed successfully!", order: newOrder });
     } catch (err) {
         res.status(500).json({ error: "Failed to place order" });
@@ -199,7 +245,7 @@ app.get('/api/orders', async (req, res) => {
 // ==========================================
 app.post('/api/create-checkout-session', async (req, res) => {
     try {
-        const { items } = req.body;
+        const { items, customerName, deliveryFee } = req.body;
 
         if (!items || items.length === 0) {
             return res.status(400).json({ message: 'Cart is empty' });
@@ -211,12 +257,23 @@ app.post('/api/create-checkout-session', async (req, res) => {
             return res.status(500).json({ message: 'Server payment configuration error' });
         }
 
+        // Map cart items into PayMongo line items
         const line_items = items.map(item => ({
             currency: 'PHP',
             amount: Math.round(item.price * 100), // Converts pesos to centavos
             name: item.name,
             quantity: item.quantity
         }));
+
+        // Include the dynamic delivery fee as a separate line item if present
+        if (deliveryFee && deliveryFee > 0) {
+            line_items.push({
+                currency: 'PHP',
+                amount: Math.round(deliveryFee * 100),
+                name: 'Delivery Fee',
+                quantity: 1
+            });
+        }
 
         const options = {
             method: 'POST',
@@ -232,8 +289,8 @@ app.post('/api/create-checkout-session', async (req, res) => {
                         line_items: line_items,
                         payment_method_types: ['card', 'gcash', 'paymaya'],
                         success_url: 'http://127.0.0.1:5500/K-Bytes%20Frontend/menu-user.html?payment=success',
-                        cancel_url: 'http://127.0.0.1:5500/K-Bytes%20Frontend/menu-user.html?payment=cancelled',
-                        description: 'K-Bites Food Delivery Order',
+                        cancel_url: 'http://127.0.0.1:5500/K-Bytes%20Frontend/checkout.html?payment=cancelled',
+                        description: `Food delivery order for ${customerName || 'Customer'}`,
                         send_email_receipt: true
                     }
                 }
@@ -259,4 +316,4 @@ app.listen(PORT, () => {
 
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('✅ Connected to MongoDB successfully'))
-  .catch((err) => console.log('❌ MongoDB connection error:', err));    
+  .catch((err) => console.log('❌ MongoDB connection error:', err));
